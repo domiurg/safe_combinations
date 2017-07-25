@@ -50,7 +50,7 @@ for i in a:
                         # Check if p2 is viable
                         if p2 in range(0, 10):
                             # Check for slots with opposite physical positions (Pic_1, Fig_#2)
-                            if (p2 != p1 + 4) and (p3 != p2 + 5):
+                            if (p2 != (p1 + 5) % 10) and (p3 != (p2 + 5) % 10):
                                 # Count total number of solutions
                                 count += 1
                                 line = '(' + str(i) + str(j) + str(k) + ')\t(' + str(p1) + str(p2) + str(p3) + ')'
