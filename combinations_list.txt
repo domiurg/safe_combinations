@@ -1,5 +1,5 @@
 Combinations List
-Safe	Peg	Key
+Safe	Peg		Key
 (001)	(019)	1
 (011)	(009)	1
 (101)	(018)	1
