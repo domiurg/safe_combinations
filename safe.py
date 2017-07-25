@@ -19,6 +19,11 @@ c = [1, 2, 6, 7]
 
 count = 0
 unique = []
+
+file = open("combinations_list.txt", "w")
+file.write("Combinations List\n")
+file.write("Safe\tPeg\n")
+
 # 3 nested loops to go over every possible combination of safe codes
 # and check them for eligibility
 for i in a:
@@ -48,14 +53,19 @@ for i in a:
                             if (p2 != p1 + 4) and (p3 != p2 + 5):
                                 # Count total number of solutions
                                 count += 1
+                                line = '(' + str(i) + str(j) + str(k) + ')\t(' + str(p1) + str(p2) + str(p3) + ')'
                                 # Print to standard output
-                                # TODO: write to file
-                                print '(' + str(p1) + str(p2) + str(p3) + ')' + '(' + str(i) + str(j) + str(k) + ')'
+                                print line
+                                # Write to output file
+                                file.write(line+'\n')
                                 # Count total number of unique safe combinations
                                 if (i, j, k) not in unique:
                                     unique.append((i, j, k))
                 else:
                     continue
 
+file.close()
+# Print total number of combinations
 print count
+# Print Unique number of combinations
 print len(unique)
