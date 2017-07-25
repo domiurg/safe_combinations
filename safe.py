@@ -28,6 +28,7 @@ file1 = open("unique_combinations_list.txt", "w")
 file1.write("Combinations List\n")
 file1.write("Safe\tPeg\t\tKey\n")
 
+# Create the list that will hold pairs of (code, peg_combination)
 comb = []
 
 # 3 nested loops to go over every possible combination of safe codes
@@ -59,7 +60,9 @@ for i in a:
                             if (p2 != (p1 + 5) % 10) and (p3 != (p2 + 5) % 10):
                                 # Count total number of solutions
                                 count += 1
+                                # Add current solution to the list for further analysis
                                 comb.append(((i,j,k),(p1,p2,p3)))
+                                # Prepare the string for standard output and file writing
                                 line = '(' + str(i) + str(j) + str(k) + ')\t(' + str(p1) + str(p2) + str(p3) + ')\t' +\
                                        str(k)
                                 # Print to standard output
@@ -71,13 +74,18 @@ for i in a:
                                     unique.append((i, j, k))
                 else:
                     continue
+# Declare counters
 u_count = 0
+# Declare the list for codes with one and only one peg_combination
 u_comb = []
+# Do a search by all code possibilities
 for item in comb:
     c = 0
+    # Count Code appearances in the list
     for i in comb:
         if item[0] == i[0]:
             c += 1
+    # If the code was found only once -> it is setup by one and only one peg_combination; remember it
     if c == 1:
         u_count += 1
         u_comb.append(item)
@@ -88,11 +96,15 @@ print count
 print len(comb)
 # Print Unique number of combinations
 print len(unique)
-
+# Print count of codes with one and only one peg_combination
 print u_count
+# Write them to file
 for i in u_comb:
+    # Prepare the string for printing and writing
     line = '(' + str(i[0][0]) + str(i[0][1]) + str(i[0][2]) + ')\t(' + str(i[1][0]) + str(i[1][1]) + str(i[1][2]) +\
            ')\t' + str(i[0][2])
+    # Print it
     print line
+    # Write it to file
     file1.write(line+'\n')
-
+file1.close()
