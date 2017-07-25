@@ -22,7 +22,13 @@ unique = []
 
 file = open("combinations_list.txt", "w")
 file.write("Combinations List\n")
-file.write("Safe\tPeg\tKey\n")
+file.write("Safe\tPeg\t\tKey\n")
+
+file1 = open("unique_combinations_list.txt", "w")
+file1.write("Combinations List\n")
+file1.write("Safe\tPeg\t\tKey\n")
+
+comb = []
 
 # 3 nested loops to go over every possible combination of safe codes
 # and check them for eligibility
@@ -53,6 +59,7 @@ for i in a:
                             if (p2 != (p1 + 5) % 10) and (p3 != (p2 + 5) % 10):
                                 # Count total number of solutions
                                 count += 1
+                                comb.append(((i,j,k),(p1,p2,p3)))
                                 line = '(' + str(i) + str(j) + str(k) + ')\t(' + str(p1) + str(p2) + str(p3) + ')\t' +\
                                        str(k)
                                 # Print to standard output
@@ -64,9 +71,28 @@ for i in a:
                                     unique.append((i, j, k))
                 else:
                     continue
+u_count = 0
+u_comb = []
+for item in comb:
+    c = 0
+    for i in comb:
+        if item[0] == i[0]:
+            c += 1
+    if c == 1:
+        u_count += 1
+        u_comb.append(item)
 
 file.close()
 # Print total number of combinations
 print count
+print len(comb)
 # Print Unique number of combinations
 print len(unique)
+
+print u_count
+for i in u_comb:
+    line = '(' + str(i[0][0]) + str(i[0][1]) + str(i[0][2]) + ')\t(' + str(i[1][0]) + str(i[1][1]) + str(i[1][2]) +\
+           ')\t' + str(i[0][2])
+    print line
+    file1.write(line+'\n')
+
